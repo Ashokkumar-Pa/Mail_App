@@ -1,0 +1,30 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Migrations\20220608060829_Initial.cs" />
+    <Compile Remove="Migrations\20220608060829_Initial.Designer.cs" />
+    <Compile Remove="Migrations\20220615080509_OnetoOneMail.cs" />
+    <Compile Remove="Migrations\20220615080509_OnetoOneMail.Designer.cs" />
+    <Compile Remove="Migrations\20220616135910_OneToOne.cs" />
+    <Compile Remove="Migrations\20220616135910_OneToOne.Designer.cs" />
+    <Compile Remove="Migrations\20220616140125_OneToOne.cs" />
+    <Compile Remove="Migrations\20220616140125_OneToOne.Designer.cs" />
+    <Compile Remove="Migrations\20220616142043_OneToOne.cs" />
+    <Compile Remove="Migrations\20220616142043_OneToOne.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.17" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.17" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.17">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+
+</Project>
