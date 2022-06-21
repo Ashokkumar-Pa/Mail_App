@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Mail_App.Migrations
 {
-    public partial class OneToOne : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -34,8 +34,8 @@ namespace Mail_App.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    FromUserId = table.Column<int>(type: "int", nullable: false),
-                    ToUserId = table.Column<int>(type: "int", nullable: false),
+                    FromUserId = table.Column<int>(type: "int", nullable: true),
+                    ToUserId = table.Column<int>(type: "int", nullable: true),
                     Subject = table.Column<string>(type: "nvarchar(280)", maxLength: 280, nullable: true),
                     Content = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     SendDateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -49,13 +49,13 @@ namespace Mail_App.Migrations
                         column: x => x.FromUserId,
                         principalTable: "User",
                         principalColumn: "UserId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_OnetoOneMails_User_ToUserId",
                         column: x => x.ToUserId,
                         principalTable: "User",
                         principalColumn: "UserId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(

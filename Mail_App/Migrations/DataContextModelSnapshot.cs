@@ -30,7 +30,7 @@ namespace Mail_App.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("FromUserId")
+                    b.Property<int?>("FromUserId")
                         .HasColumnType("int");
 
                     b.Property<bool>("IsReaded")
@@ -43,7 +43,7 @@ namespace Mail_App.Migrations
                         .HasMaxLength(280)
                         .HasColumnType("nvarchar(280)");
 
-                    b.Property<int>("ToUserId")
+                    b.Property<int?>("ToUserId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -126,15 +126,11 @@ namespace Mail_App.Migrations
                 {
                     b.HasOne("Mail_App.Models.UserProfile", "GetFromUser")
                         .WithMany()
-                        .HasForeignKey("FromUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("FromUserId");
 
                     b.HasOne("Mail_App.Models.UserProfile", "GetToUser")
                         .WithMany()
-                        .HasForeignKey("ToUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ToUserId");
 
                     b.Navigation("GetFromUser");
 

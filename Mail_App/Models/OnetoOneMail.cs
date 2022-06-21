@@ -13,15 +13,15 @@ namespace Mail_App.Models
         public int Id { get; set; }
         [ForeignKey("GetFromUser")]
 
-        [Required]
-        public int FromUserId { get; set; }
+        //[Required]
+        public int? FromUserId { get; set; }
 
         public virtual UserProfile GetFromUser { get; set; }   
         
-        [Required]
+        //[Required]
         [ForeignKey("GetToUser")]
 
-        public int ToUserId { get; set; }
+        public int? ToUserId { get; set; }
         public virtual UserProfile GetToUser { get; set; }
 
         [MaxLength(280)]
