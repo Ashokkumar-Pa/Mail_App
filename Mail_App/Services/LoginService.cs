@@ -7,15 +7,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Mail_App.Models;
+using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
+using System.Text;
+using Microsoft.Extensions.Configuration;
+using System.Security.Claims;
 
 namespace Mail_App.Services
 {
     public class LoginService : ILogin
     {
         private readonly IUserRepository userRepository;
-        public LoginService(IUserRepository _userRepository)
+        private readonly IAuthenticationManager authenticationManager;
+        public LoginService(IUserRepository _userRepository, IAuthenticationManager _authenticationManager)
         {
             userRepository = _userRepository;
+            authenticationManager =_authenticationManager;
         }
 
         public bool AddNewUser(Register newUser)
@@ -60,10 +67,12 @@ namespace Mail_App.Services
             var user = userRepository.GetUserProfile(id);
             if (user != null)
             {
+
+
                 return new Response
                 {
                     Status = true,
-                    Messege = "Valied Id",
+                    Messege = "",
                     data = user
                 };
             }
@@ -80,11 +89,14 @@ namespace Mail_App.Services
             var user = userRepository.GetUserProfile(passwordCheck);
             if (user != null)
             {
+
+                var token = authenticationManager.GetToken(user);
+
                 return new Response
                 {
                     Status = true,
                     Messege = "Valied Id",
-                    data = user
+                    data = token
                 };
             }
             return new Response

@@ -5,14 +5,10 @@ using System.Threading.Tasks;
 
 namespace Mail_App.ResponseModels
 {
-    public class IdCheck
+    public class UserTokenModel
     {
         public string Name { get; set; }
-        public int Id { get; set; }
-    }
-    public class PasswordCheck
-    {
-        public string Password { get; set; }
-        public int Id { get; set; }
+        public int UserId { get; set; }
+        public string EmailAddress { get; set; }
     }
 }

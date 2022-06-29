@@ -1,6 +1,7 @@
 ﻿using Mail_App.IServices;
 using Mail_App.ResponseModels;
 using Mail_App.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -14,6 +15,7 @@ namespace Mail_App.Controllers
     [ApiController]
     [Route("[controller]")]
     [EnableCors]
+    [Authorize]
     public class LoginController : ControllerBase
     {
         private readonly ILogin service;
@@ -22,6 +24,7 @@ namespace Mail_App.Controllers
            service = loginService;
         }
         [HttpPost("{newUser}")]
+        [AllowAnonymous]
         [Route("Register")]
 
         public ActionResult<Response> Register(Register newUser)
@@ -46,7 +49,9 @@ namespace Mail_App.Controllers
             };
         }
         [HttpGet]
-        [Route("Login/{id}")]
+        [Route("Login")]
+        [AllowAnonymous]
+
         public ActionResult<Response> CheckUserId( string id)
         {
             if (id != null)
@@ -61,7 +66,8 @@ namespace Mail_App.Controllers
             };
         }
         [HttpGet]
-        [Route("CheckUserPassword/{password}")]
+        [AllowAnonymous]
+        [Route("CheckUserPassword")]
         public ActionResult<Response> CheckPasword(PasswordCheck password)
         {
             if (password != null)
@@ -75,6 +81,7 @@ namespace Mail_App.Controllers
                 data = null
             };
         }
+        //[AllowAnonymous]
         [HttpGet]
         public string Index()
         {

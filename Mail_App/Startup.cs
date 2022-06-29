@@ -5,17 +5,13 @@ using Mail_App.Services;
 using Mail_App.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace Mail_App
 {
@@ -35,6 +31,25 @@ namespace Mail_App
             var connection = Configuration.GetConnectionString("userinfodatabase");
             services.AddDbContext<DataContext>(option => option.UseSqlServer(connection));
             services.AddCors();
+            services.AddTransient<IAuthenticationManager, AuthenticationManager>();
+
+            services.AddAuthentication(o =>
+            {
+                o.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                o.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(b =>
+            {
+                b.RequireHttpsMetadata = false;
+                b.SaveToken = true;
+                b.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(Configuration["Jwt:ProviderKey"])),
+                    ValidateIssuer = false,
+                    ValidateAudience = false 
+                };
+            });
+
             services.AddTransient<ILogin, LoginService>();
             services.AddTransient<IUserRepository, UserRepository>();
         }
@@ -50,7 +65,7 @@ namespace Mail_App
             app.UseHttpsRedirection();
 
             app.UseRouting();
-
+            app.UseAuthentication();
             app.UseAuthorization();
             app.UseCors();
             app.UseCors(builder =>

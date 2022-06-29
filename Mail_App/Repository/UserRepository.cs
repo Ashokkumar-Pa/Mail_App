@@ -54,9 +54,15 @@ namespace Mail_App.Repository
                 Id = s.Id
             }).FirstOrDefault();
         }
-        int IUserRepository.GetUserProfile(PasswordCheck passwordCheck)
+        UserTokenModel IUserRepository.GetUserProfile(PasswordCheck passwordCheck)
         {
-            return db.UserPassword.Where(f => f.Id == passwordCheck.Id && f.Password == passwordCheck.Password ).Select(s => s.UserId).FirstOrDefault();
+            return db.UserPassword.Where(f => f.Id == passwordCheck.Id && f.Password == passwordCheck.Password ).Select(s => 
+            new UserTokenModel 
+            { 
+                Name = s.User.FirstName + " " + s.User.LastName,
+                EmailAddress = s.User.EmailAddress,
+                UserId = s.UserId
+            }).FirstOrDefault();
         }
     }
 }
