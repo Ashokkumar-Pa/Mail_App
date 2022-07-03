@@ -13,6 +13,10 @@ namespace Mail_App.IRepository
         bool AddNewUserPassword(UserPassword user);
         IdCheck GetUserProfile(string EmailorPhone);
         UserTokenModel GetUserProfile(PasswordCheck passwordCheck);
+        int GetUserId(int id, string email);
+        int GetUserId(string email);
+
+
 
     }
 }

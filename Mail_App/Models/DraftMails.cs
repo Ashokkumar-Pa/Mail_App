@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Mail_App.Models
 {
-    public class OnetoOneMail
+    public class DraftMails
     {
         [Key]
         public int Id { get; set; }
@@ -16,8 +16,8 @@ namespace Mail_App.Models
         [Required]
         public int FromUserId { get; set; }
 
-        public virtual UserProfile GetFromUser { get; set; }   
-        
+        public virtual UserProfile GetFromUser { get; set; }
+
         //[Required]
         [ForeignKey("GetToUser")]
 
@@ -32,11 +32,6 @@ namespace Mail_App.Models
         public string Content { get; set; }
 
         [Required]
-        public DateTime SendDateTime { get; set; }
-
-        [Required]
-        public bool IsReaded { get; set; }
-
-
+        public DateTime LastSaveDateTime { get; set; }
     }
 }

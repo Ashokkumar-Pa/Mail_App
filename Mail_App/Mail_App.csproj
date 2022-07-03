@@ -5,6 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Controllers\StudentAttendanceDetailsModel.cs" />
+    <Compile Remove="Controllers\WeatherForecastController.cs" />
     <Compile Remove="Migrations\20220608060829_Initial.cs" />
     <Compile Remove="Migrations\20220608060829_Initial.Designer.cs" />
     <Compile Remove="Migrations\20220615080509_OnetoOneMail.cs" />
@@ -15,6 +17,7 @@
     <Compile Remove="Migrations\20220616140125_OneToOne.Designer.cs" />
     <Compile Remove="Migrations\20220616142043_OneToOne.cs" />
     <Compile Remove="Migrations\20220616142043_OneToOne.Designer.cs" />
+    <Compile Remove="WeatherForecast.cs" />
   </ItemGroup>
 
   <ItemGroup>

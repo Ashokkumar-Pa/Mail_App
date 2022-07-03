@@ -13,5 +13,6 @@ namespace Mail_App.IServices
         Response CheckUserId(string id);
         Response CheckUserPassword(PasswordCheck passwordCheck);
 
+
     }
 }

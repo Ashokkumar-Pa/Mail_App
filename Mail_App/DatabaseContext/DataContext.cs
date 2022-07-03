@@ -12,5 +12,6 @@ namespace Mail_App.DatabaseContext
         public DbSet<UserProfile> User { get; set; }
         public DbSet<UserPassword> UserPassword { get; set; }
         public DbSet<OnetoOneMail> OnetoOneMails { get; set; }
+        public DbSet<DraftMails> DraftMails { get; set; }
     }
 }

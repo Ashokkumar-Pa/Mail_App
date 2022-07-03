@@ -46,6 +46,16 @@ namespace Mail_App.Repository
             }
         }
 
+        public int GetUserId(int id, string email)
+        {
+            return db.UserPassword.Where(f => f.Id == id && f.User.EmailAddress == email).Select(s => s.UserId).FirstOrDefault();
+        }
+
+        public int GetUserId(string email)
+        {
+            return db.User.Where(f => f.EmailAddress == email).Select(s => s.UserId).FirstOrDefault();
+        }
+
         IdCheck IUserRepository.GetUserProfile(string id)
         {
             return db.UserPassword.Where(f => f.User.EmailAddress == id || f.User.PhoneNumber == id).Select(s => new IdCheck

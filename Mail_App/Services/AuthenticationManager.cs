@@ -44,7 +44,6 @@ namespace Mail_App.Services
             }
             catch (Exception)
             {
-
                 throw;
             }
         }

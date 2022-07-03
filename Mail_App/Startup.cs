@@ -52,6 +52,8 @@ namespace Mail_App
 
             services.AddTransient<ILogin, LoginService>();
             services.AddTransient<IUserRepository, UserRepository>();
+            services.AddTransient<IMailService, MailService>();
+            services.AddTransient<IMailRepository, MailRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
