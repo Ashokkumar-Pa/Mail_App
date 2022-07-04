@@ -65,14 +65,18 @@ namespace Mail_App.Controllers
                 data = null
             };
         }
-        [HttpGet]
+        [HttpGet("CheckUserPassword")]
         [AllowAnonymous]
-        [Route("CheckUserPassword")]
-        public ActionResult<Response> CheckPasword(PasswordCheck password)
+        public ActionResult<Response> CheckPasword(string password, int id)
         {
-            if (password != null)
+            if (password != null && id > 0)
             {
-                return service.CheckUserPassword(password);
+                PasswordCheck passwordCheck = new PasswordCheck
+                {
+                    Password = password,
+                    Id = id
+                };
+                return service.CheckUserPassword(passwordCheck);
             }
             return new Response()
             {
